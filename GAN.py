@@ -126,8 +126,11 @@ class GAN:
                 print(f"[Epoch {epoch}/{epochs}] [Batch {i}/{len(dataloader)}] [D loss: {d_loss.item()}] [G loss: {g_loss.item()}]")
 
                 batches_done = epoch * len(dataloader) + i
-                if batches_done % sample_interval == 0:
-                    self.sample_images(batches_done)
+                # if batches_done % sample_interval == 0:
+                #     self.sample_images(batches_done)
+            if (epoch + 1) == 30:
+                torch.save(self.generator.state_dict(), "generator.pth")
+                torch.save(self.discriminator.state_dict(), "discriminator.pth")
 
 
     def sample_images(self, batches_done):
